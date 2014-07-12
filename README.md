@@ -10,3 +10,4 @@ Room opcupancy calendar for Seminar Zentrum in Wien
 -problems with the table headers to be fixed
 -problems working with 6 tables. It will be with one next version
 
+http://victorgil.name/test/szcalendar1/
