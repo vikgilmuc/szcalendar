@@ -11,5 +11,7 @@ Room opcupancy calendar for Seminar Zentrum in Wien
 -problems working with 6 tables. It will be with one next version
 
 http://victorgil.name/test/szcalendar1/
+datei aus : https://www.google.com/calendar/embed?src=108mgf7jqqko66rarskghbldlk%40group.calendar.google.com&ctz=Europe/Berlin 
+
 
 Noch in Ultra-Beta version, sorry.
