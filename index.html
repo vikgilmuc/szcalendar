@@ -2,94 +2,43 @@
 <html>
 	<head>
 		<title></title>
-		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link rel="stylesheet" type="text/css" href="./css/style.css" />
 	
-		<script type="text/javascript" src="jquery-1.6.2.min.js"></script>
-		<script type="text/javascript" src="jquery.touchSlider.js"></script>
-		<script type="text/javascript" src="szcalendar.js"></script>
-		<script type="text/javascript" src="jquery.json-2.4.js"></script>
-
+		<script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="./js/jquery.touchSlider.js"></script>
+		
+	
+		<script type="text/javascript" src="./js/jsviews.js"></script>
+		
+		<script type="text/javascript" src="./js/jquery.json-2.4.js"></script>
+        <script type="text/javascript" src="./js/lib.js"></script>
+         <script type="text/javascript" src="./js/szc.js"></script>
+        
+        <script type="text/javascript" src="./js/szc.model.js"></script>
+        <script type="text/javascript" src="./js/szc.util.js"></script>
+       
+        <script type="text/javascript" src="./js/szc.shell.js"></script>
+        <script type="text/x-jsrender" id="ocutmpl">
+        
+       <span>{{:summary}}{{:room}}</span>
+       
+        </script>
+                
+        
+        
 		<script type="text/javascript">
+		
+		$(function () { szc.initModule( $('#szc') ); 
+		
+		
+		
+		});
 
-			$(document).ready(function(){
-				$('#gallery1').touchSlider({
-					mode: 'shift',
-					offset: 'auto'
-				});
-
-				$('#gallery2').touchSlider({
-					animation: 'js',
-					mode: 'shift',
-					offset: 'auto'
-				});
-
-				$('#gallery3').touchSlider({
-					animation: false,
-					mode: 'shift',
-					offset: 'auto'
-				});
+		
 			
-			function daysInMonth(month,year) {
-                 return new Date(year, month, 0).getDate();}
-			today = new Date();
-			
-			var raum1 = new Month((today.getMonth()),today.getFullYear(),1);
-			var raum2 = new Month((today.getMonth()),today.getFullYear(),2);
-			var raum3 = new Month((today.getMonth()),today.getFullYear(),3);
-			var raum4 = new Month((today.getMonth()),today.getFullYear(),4);
-			var raum5 = new Month((today.getMonth()),today.getFullYear(),5);
-			var raum6 = new Month((today.getMonth()),today.getFullYear(),6);
-			
-			
-			
-			  
-			
-      
-			 var cal1_html=raum1.tablify();
-			 var cal2_html=raum2.tablify();
-			 var cal3_html=raum3.tablify();
-			 var cal4_html=raum4.tablify();
-			 var cal5_html=raum5.tablify();
-			 var cal6_html=raum6.tablify();
-			 
-			console.log(cal1_html);
-			$('#cal1_container').append(cal1_html);
-			$('#cal2_container').append(cal2_html);
-			$('#cal3_container').append(cal3_html);
-			$('#cal4_container').append(cal4_html);
-			$('#cal5_container').append(cal5_html);
-			$('#cal6_container').append(cal6_html);
-			 
-        
-        
-      
-                    
-            $.ajax({
-                    url: 'https://www.googleapis.com/calendar/v3/calendars/108mgf7jqqko66rarskghbldlk%40group.calendar.google.com/events?key=AIzaSyD9k14jGF8mF3O0wn5kBV8C_AVs41bYKNs',
-                    dataType: 'jsonp',
-                    success: function(daten) {
-                        var events=[];
-                        $.each(daten.items, function(index) {
-                            console.log(daten.items[index].start.date?daten.items[index].start.date:daten.items[index].start.dateTime);  //to control / to be eliminated
-                            var comienzo= new Date(daten.items[index].start.date?daten.items[index].start.date:daten.items[index].start.dateTime);
-                          
-                            var query= "#cal1_container td:contains(" +comienzo.getDate()+ ")";
-                            console.log(query);
-                            $(query).append("  "+daten.items[index].summary);
-                            //console.log(daten.items[index].start.dateTime);  //to control / to be eliminated
-                        });
-                        var datenforbinding={etag:daten};
-                        $.toJSON(datenforbinding);
-                        //console.log(datenforbinding);// to control / to be eliminated
-                        
-                        }
-                        
-                         
-                        
-                    });              
-                          
+		
                      
          (function($) {
            $.fn.fixMe = function() {
@@ -127,55 +76,28 @@
   //$("table").fixMe();
    
         
-    });
+   
         
 			
 		</script>
 	</head>
-	<body>
+	<body id="szc">
 		<h1>Seminar Zentrum</h1>
 
-	
+	<div id="users">
+    <form>
+      <input type="search" value="" placeholder="Enter a query">
+      <button>Search</button>
+       <div id="newvisit"><p>New visit</p></div>
+    </form>
+  </div>
+  
 
-		<div class="Calendar">
-			<div class="gallery" id="gallery1">
-				<div class="holder">
-					<div class="list">
-						
-						<div class="item"><div id="cal1_container" class="box box1">
-						    
-						    </div>
-						    
-						    <div id="cal2_container" class="box box1">
-                            
-                            </div></div>
-						    
-						<div class="item"><div id="cal3_container" class="box box1">
-						    
-                             
-						    </div><div id="cal4_container" class="box box1">
-                            
-                             
-                            </div>
-						    
-						    </div>
-						    
-						<div class="item"><div id="cal5_container" class="box box1">
-						    
-                                
-                            
-						    </div>
-						    <div id="cal6_container" class="box box1">
-                            
-                                
-                            
-                            </div>
-						    
-						    </div>
-						
-					</div>
-				</div>
-			</div>
+		<div id="Calendar">
+			
+			
+			
+			
 		</div>
 
 	
