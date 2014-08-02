@@ -1,51 +1,43 @@
-	
-	
 szc.model= (function(){
-   
-  
-    var tablecalendar = {
-    raume: 5, tage:30 };
 
     
-   var Month = function (month,year,raum) {
-    
-    var monthNames = [ "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December" ];
-    this.name= monthNames[month];
-    this.lange= (new Date(year, month, 0)).getDate() ;
-       this.year= year;
-       this.month=month;
-       this.raume=5;
-        };
-
-   Month.prototype= { 
-    setlenght: function () {    
-      this.lange=daysInMonth(7,2014) ;},
-
-   
-    };
-
-    thisMonth= new Month(7,2014,5);
-
-   function daysInMonth(month,year) {
-                 return new Date(year, month, 0).getDate();
-                 
-    }
-
-
- 
-     today = new Date();
+           var Month = function (month,year,raum) {
             
+                var monthNames = [ "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December" ];
+                this.name= monthNames[month];
+                this.lange= (new Date(year, month, 0)).getDate() ;
+               this.year= year;
+               this.month=month;
+               this.raume=5;
+                };
+        
+           Month.prototype= { 
+            setlenght: function () {    
+              this.lange=daysInMonth(7,2014) ;},
+            };
+        
+            thisMonth= new Month(7,2014,5);
+        
+           function daysInMonth(month,year) {
+                         return new Date(year, month, 0).getDate();
+            }
+             today = new Date();
+                    
+  
+  
   
    
    var Ocupancies= Model.create();
    
    Ocupancies.extend({
        tablify: function(ocupanciedays){
+           /***** this doesn't match here, but (still) don't know where----*/
+           
         var i=1, j=1;
         var table="<table><thead><tr>"
         for(j=1 ;j<=5; j++)
-        table+= "<th>${raume}Raum "+thisMonth.raum+"</th>";
+        table+= "<th>Raum "+j+"</th>";
         table+= "</tr></thead><tbody>";
         for(i=1 ;i<=thisMonth.lange; i++) {
            table+="<tr"; 
@@ -88,7 +80,11 @@ szc.model= (function(){
                 
                 Ocupancies.room=1;
                 Ocupancies.populate(daten.items);
-                PubSub.publish("wem");
+                var ocupancies1= Ocupancies.init({room: 1});
+                ocupancies1.records= Ocupancies.records;
+                ocupancies1.save();
+              //  localStorage.setItem("loc_ocupancies1", JSON.stringify(ocupancies1));
+                PubSub.publish("insert");
                         }
                         
         }); 
@@ -97,8 +93,12 @@ szc.model= (function(){
             dataType: 'jsonp',
             success: function(daten) {
                 Ocupancies.room = 2;
-                Ocupancies.populate(daten.items);              
-                PubSub.publish("wem");
+                Ocupancies.populate(daten.items);    
+                var ocupancies2= Ocupancies.init({room: 2}); 
+                ocupancies2.records= Ocupancies.records; 
+                ocupancies2.save();    
+               // localStorage.setItem("loc_ocupancies2", JSON.stringify(ocupancies2));  
+                PubSub.publish("insert");
                         }
                         
         }); 

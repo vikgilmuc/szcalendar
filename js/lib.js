@@ -243,10 +243,10 @@ Math.guid = function(){
 (function($){
     var mod = {};
         mod.create = function(includes){
-        var result = function(){
-          this.initializer.apply(this, arguments);
-          this.init.apply(this, arguments);
-        };
+            var result = function(){
+              this.initializer.apply(this, arguments);
+              this.init.apply(this, arguments);
+            };
         
         result.fn= result.prototype;
         result.fn.init= function(){};
@@ -258,30 +258,25 @@ Math.guid = function(){
         
         result.include({
             initializer: function(options){
-            this.options = options;
+                this.options = options;
+                for (var key in this.options)
+                  this[key] = this.options[key];
+                if (this.events) this.delegateEvents();
+                if (this.elements) this.refreshElements();
+            },
             
-            for (var key in this.options)
-              this[key] = this.options[key];
-
-            if (this.events) this.delegateEvents();
-            if (this.elements) this.refreshElements();
-          },
-          
+            //Private  
+            
             $: function(selector){
                 return $(selector, this.el);
              },
-
              refreshElements: function(){
-          
-            for (var key in this.elements) {
-                   
-              this[this.elements[key]] = this.$(key);
-            }
+                for (var key in this.elements) {
+                    this[this.elements[key]] = this.$(key);
+                }
             },
-            
-            
             eventSplitter: /^(\w+)\s*(.*)$/,
-        
+            
             delegateEvents: function(){
                 for (var key in this.events) {
                     var methodName = this.events[key];

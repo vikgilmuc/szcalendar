@@ -25,83 +25,30 @@
        <span>{{:summary}}{{:room}}</span>
        
         </script>
-                
-        
-        
 		<script type="text/javascript">
 		
 		$(function () { szc.initModule( $('#szc') ); 
 		
-		
-		
 		});
 
-		
-			
-		
-                     
-         (function($) {
-           $.fn.fixMe = function() {
-              return this.each(function() {
-                 var $this = $(this),
-                    $t_fixed;
-                 function init() {
-                    $this.wrap('<div class="container" />');
-                    $t_fixed = $this.clone();
-                    $t_fixed.find("tbody").remove().end().addClass("fixed").insertBefore($this);
-                    resizeFixed();
-                 }
-                 function resizeFixed() {
-                    $t_fixed.find("th").each(function(index) {
-                       $(this).css("width",$this.find("th").eq(index).outerWidth()+"px");
-                    });
-                 }
-                 function scrollFixed() {
-                    var offset = $(this).scrollTop(),
-                    tableOffsetTop = $this.offset().top,
-                    tableOffsetBottom = tableOffsetTop + $this.height() - $this.find("thead").height();
-                    if(offset < tableOffsetTop || offset > tableOffsetBottom)
-                       $t_fixed.hide();
-                    else if(offset >= tableOffsetTop && offset <= tableOffsetBottom && $t_fixed.is(":hidden"))
-                       $t_fixed.show();
-                 }
-                 $(window).resize(resizeFixed);
-                 $(window).scroll(scrollFixed);
-                 init();
-              });
-           };
-        })(jQuery);
-
-
-  //$("table").fixMe();
-   
-        
-   
-        
-			
 		</script>
 	</head>
 	<body id="szc">
 		<h1>Seminar Zentrum</h1>
 
 	<div id="users">
-    <form>
-      <input type="search" value="" placeholder="Enter a query">
-      <button>Search</button>
-       <div id="newvisit"><p>New visit</p></div>
-    </form>
-  </div>
+        <form>
+          <input type="search" value="" placeholder="Enter a query">
+          <button>Search</button>
+           <div id="newvisit"><p>New visit</p></div>
+        </form>
+    </div>
   
 
 		<div id="Calendar">
 			
-			
-			
-			
 		</div>
 
 	
-	
-
 	</body>
 </html>
