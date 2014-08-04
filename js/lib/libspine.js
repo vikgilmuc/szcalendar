@@ -333,8 +333,8 @@ define(["jquery"],
           
          return {
         assert:assert,
-        Model:Model
-        
+        Model:Model,
+        PubSub:PubSub
         };
   
         

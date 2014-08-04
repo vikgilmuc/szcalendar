@@ -1,7 +1,7 @@
 
 
 
-define (["jquery", "libspine","app/szc.model", "app/szc.shell"], function ($, lib,model, shell){
+define (["jquery", "libspine","app/szc.model", "app/szc.shell","jsviews","jsrender"], function ($, lib, model, shell,jsviews,jsrender){
     
  
     var ocupanciedays={};
@@ -13,9 +13,10 @@ define (["jquery", "libspine","app/szc.model", "app/szc.shell"], function ($, li
        
         var cal1_html=model.Ocupancies.tablify(ocupanciedays);
         $('#Calendar').append(cal1_html);
-        PubSub.subscribe("insert", function(){
-              $.each(szc.model.Ocupancies.records, 
+        lib.PubSub.subscribe("insert", function(){
+              $.each(model.Ocupancies.records, 
                   function(index){ 
+                      console.log(this);
                          if (this.start.date)
                             {var date= new Date(this.start.date);
                             }
@@ -23,7 +24,7 @@ define (["jquery", "libspine","app/szc.model", "app/szc.shell"], function ($, li
                             {var date= new Date(this.start.dateTime)
                             }
                     var myTemplate = $.templates("#ocutmpl");
-                    var calid= "#"+date.getDate()+szc.model.Ocupancies.room;
+                    var calid= "#"+date.getDate()+model.Ocupancies.room;
                     myTemplate.link(calid, this);
                  }
              );

@@ -1,6 +1,12 @@
 szcalendar
 ==========
 
+Branch requirejs...
+
+Created defines and dependencies... works but need to be refactored. 
+
+------------------------------
+
 Room opcupancy calendar for Seminar Zentrum in Wien
 
 +Integration with google calendar API

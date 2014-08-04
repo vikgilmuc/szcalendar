@@ -11,7 +11,7 @@ requirejs.config({
 
 
 
-requirejs(['jquery','libspine','app/szc'], function($,lib,szc){
+requirejs(['jquery','libspine',"jsviews","jsrender",'app/szc'], function($,lib,jsviews, jsrender,szc){
     
     szc.initModule();
 }

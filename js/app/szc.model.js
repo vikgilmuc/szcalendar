@@ -1,4 +1,4 @@
-define( function(){
+define( ["libspine"], function(lib){
     
          var Month = function (month,year,raum) {
             
@@ -24,7 +24,7 @@ define( function(){
             today = new Date();
                     
   
-           var Ocupancies= Model.create();
+           var Ocupancies= lib.Model.create();
                
             Ocupancies.extend({
                    tablify: function(ocupanciedays){
@@ -73,7 +73,7 @@ define( function(){
                 ocupancies1.records= Ocupancies.records;
                 ocupancies1.save();
               //  localStorage.setItem("loc_ocupancies1", JSON.stringify(ocupancies1));
-                PubSub.publish("insert");
+                lib.PubSub.publish("insert");
                         }
                         
         }); 
@@ -87,7 +87,7 @@ define( function(){
                 ocupancies2.records= Ocupancies.records; 
                 ocupancies2.save();    
                // localStorage.setItem("loc_ocupancies2", JSON.stringify(ocupancies2));  
-                PubSub.publish("insert");
+                lib.PubSub.publish("insert");
                         }
                         
           }); 
