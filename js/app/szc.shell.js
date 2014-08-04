@@ -1,11 +1,12 @@
-szc.shell = (function () {
-    var initModule;
+define(function (){
     
-    initModule = function ($container) 
-    {
+    var initModule = function ($container) {
+        
         /*----------------- controller calendar ---------*/
-            jQuery(function($){
-                exports.szc.controller = Controller.create({
+       
+      
+           $(function($){
+                szc.controller = Controller.create({
                     elements: {
                         "input[type=search]":"searchInput",
                         "form":"searchForm",
@@ -32,9 +33,13 @@ szc.shell = (function () {
                         console.log("openwindow");
                         return false;
                     },
-             });
+                 });
              new szc.controller({el: $("#users")});
-        });
+        })
+    
     };
-    return { initModule : initModule };
-}());
+    
+ return { initModule : initModule };
+ 
+ 
+});
