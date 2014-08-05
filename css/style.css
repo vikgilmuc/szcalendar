@@ -19,10 +19,12 @@ h1, h2 {
 top:30px;
 }
 
-th{height:30px}
+th{height:30px; background-color: white}
 
 td {width: 150px;
-overflow: hidden}
+overflow: hidden;
+border-top: 1px   solid black
+}
 
 .box {
 	width: 150px;

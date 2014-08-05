@@ -5,6 +5,7 @@ var szc = (function () {
         szc.shell.initModule( $container );
             var cal1_html=szc.model.Ocupancies.tablify(ocupanciedays);
             $('#Calendar').append(cal1_html);
+            $('table').stickyTableHeaders();
             PubSub.subscribe("insert", function(){
            
                 $.each(szc.model.Ocupancies.records, function(index){ 

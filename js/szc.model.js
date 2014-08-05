@@ -42,19 +42,21 @@ szc.model= (function(){
         for(i=1 ;i<=thisMonth.lange; i++) {
            table+="<tr"; 
            if (new Date(thisMonth.year,thisMonth.month,i).getDay()==0||
-           new Date(thisMonth.year,thisMonth.month,i).getDay()==6){
-               if (new Date().getDate()==i){table+=" class='today "}
-                else table+=" class='";
-               table+="we '";
+           new Date(thisMonth.year,thisMonth.month,i).getDay()==6|| today.getDate()==i){ 
+               table+=" class='";
+               if (new Date().getDate()!=i) table+="we '"
+                else table+="today'";
                 
                
-          };
+            };
+           
+           
            table+=">"
            
            for(j=1 ;j<=5; j++){
-           table+="<td id='"+i+j+"'>"+i;
+           table+="<td>"+i+"<span id='"+i+j+"'>";
            
-           table+="</td>";
+           table+="</span></td>";
            }
            table+="</tr>";
         };
@@ -72,6 +74,17 @@ szc.model= (function(){
    
    
    initModule= function(){
+       
+       $.ajax({
+          // url:'https://www.googleapis.com/calendar/v3/users/me/calendarList?key=AIzaSyD9k14jGF8mF3O0wn5kBV8C_AVs41bYKNs',
+          // dataType: 'jsonp',
+          //  success: function(daten) {
+                
+               
+           //             }
+       });
+       
+       
        
          $.ajax({
             url: 'https://www.googleapis.com/calendar/v3/calendars/lm4ac6bt0i9ogdvho49j3e77fo%40group.calendar.google.com/events?timeMax=2014-08-31T00%3A00%3A00%2B00%3A00&timeMin=2014-08-01T00%3A00%3A00%2B00%3A00&key=AIzaSyD9k14jGF8mF3O0wn5kBV8C_AVs41bYKNs',
@@ -103,8 +116,49 @@ szc.model= (function(){
                         
         }); 
    
+    $.ajax({
+            url: 'https://www.googleapis.com/calendar/v3/calendars/df74thb0ufev0n2k7tsm9jcucs@group.calendar.google.com/events?timeMax=2014-08-31T00%3A00%3A00%2B00%3A00&timeMin=2014-08-01T00%3A00%3A00%2B00%3A00&key=AIzaSyD9k14jGF8mF3O0wn5kBV8C_AVs41bYKNs',
+            dataType: 'jsonp',
+            success: function(daten) {
+                Ocupancies.room = 3;
+                Ocupancies.populate(daten.items);    
+                var ocupancies3= Ocupancies.init({room: 3}); 
+                ocupancies3.records= Ocupancies.records; 
+                ocupancies3.save();    
+               // localStorage.setItem("loc_ocupancies2", JSON.stringify(ocupancies2));  
+                PubSub.publish("insert");
+                        }
+                        
+        }); 
    
-   
+    $.ajax({
+            url: 'https://www.googleapis.com/calendar/v3/calendars/ib6qioa059in1oc2222pg749eg@group.calendar.google.com/events?timeMax=2014-08-31T00%3A00%3A00%2B00%3A00&timeMin=2014-08-01T00%3A00%3A00%2B00%3A00&key=AIzaSyD9k14jGF8mF3O0wn5kBV8C_AVs41bYKNs',
+            dataType: 'jsonp',
+            success: function(daten) {
+                Ocupancies.room = 4;
+                Ocupancies.populate(daten.items);    
+                var ocupancies4= Ocupancies.init({room: 4}); 
+                ocupancies4.records= Ocupancies.records; 
+                ocupancies4.save();    
+               // localStorage.setItem("loc_ocupancies2", JSON.stringify(ocupancies2));  
+                PubSub.publish("insert");
+                        }
+                        
+        }); 
+   $.ajax({
+            url: 'https://www.googleapis.com/calendar/v3/calendars/2n2ajrefh42loj3bo2ipj89ptg4@group.calendar.google.com/events?timeMax=2014-08-31T00%3A00%3A00%2B00%3A00&timeMin=2014-08-01T00%3A00%3A00%2B00%3A00&key=AIzaSyD9k14jGF8mF3O0wn5kBV8C_AVs41bYKNs',
+            dataType: 'jsonp',
+            success: function(daten) {
+                Ocupancies.room = 5;
+                Ocupancies.populate(daten.items);    
+                var ocupancies5= Ocupancies.init({room: 5}); 
+                ocupancies5.records= Ocupancies.records; 
+                ocupancies5.save();    
+               // localStorage.setItem("loc_ocupancies2", JSON.stringify(ocupancies2));  
+                PubSub.publish("insert");
+                        }
+                        
+        }); 
    
    
    
