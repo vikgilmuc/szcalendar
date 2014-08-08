@@ -13,7 +13,7 @@ Room opcupancy calendar for Seminar Zentrum in Wien
 -Oauth
 
 
-http://victorgil.name/test/szcalendar1/
+http://victorgil.name/test/szcalendar2/
 datei aus : https://www.google.com/calendar/embed?src=108mgf7jqqko66rarskghbldlk%40group.calendar.google.com&ctz=Europe/Berlin 
 
 
