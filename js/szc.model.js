@@ -1,6 +1,6 @@
 szc.model= (function(){
 
-    
+ var ocupancies= [];
            var Month = function (month,year,raum) {
             
                 var monthNames = [ "January", "February", "March", "April", "May", "June",
@@ -64,110 +64,36 @@ szc.model= (function(){
     return table
       }
    }) 
-   
-   
-   
- 
-   
-     
- 
-   
-   
+
    initModule= function(){
        
-       $.ajax({
-          // url:'https://www.googleapis.com/calendar/v3/users/me/calendarList?key=AIzaSyD9k14jGF8mF3O0wn5kBV8C_AVs41bYKNs',
-          // dataType: 'jsonp',
-          //  success: function(daten) {
-                
-               
-           //             }
-       });
+       var calendars_id=['lm4ac6bt0i9ogdvho49j3e77fo@group.calendar.google.com','2t7r6pgspu3p0el4omkfqvk7os@group.calendar.google.com', 'df74thb0ufev0n2k7tsm9jcucs@group.calendar.google.com','ib6qioa059in1oc2222pg749eg@group.calendar.google.com',
+       'n2ajrefh42loj3bo2ipj89ptg4@group.calendar.google.com'];
        
-       
-       
-         $.ajax({
-            url: 'https://www.googleapis.com/calendar/v3/calendars/lm4ac6bt0i9ogdvho49j3e77fo%40group.calendar.google.com/events?timeMax=2014-08-31T00%3A00%3A00%2B00%3A00&timeMin=2014-08-01T00%3A00%3A00%2B00%3A00&key=AIzaSyD9k14jGF8mF3O0wn5kBV8C_AVs41bYKNs',
-            dataType: 'jsonp',
-            success: function(daten) {
-                
-                Ocupancies.room=1;
-                Ocupancies.populate(daten.items);
-                var ocupancies1= Ocupancies.init({room: 1});
-                ocupancies1.records= Ocupancies.records;
-                ocupancies1.save();
-              //  localStorage.setItem("loc_ocupancies1", JSON.stringify(ocupancies1));
-                PubSub.publish("insert");
-                        }
-                        
-        }); 
-         $.ajax({
-            url: 'https://www.googleapis.com/calendar/v3/calendars/2t7r6pgspu3p0el4omkfqvk7os@group.calendar.google.com/events?timeMax=2014-08-31T00%3A00%3A00%2B00%3A00&timeMin=2014-08-01T00%3A00%3A00%2B00%3A00&key=AIzaSyD9k14jGF8mF3O0wn5kBV8C_AVs41bYKNs',
-            dataType: 'jsonp',
-            success: function(daten) {
-                Ocupancies.room = 2;
-                Ocupancies.populate(daten.items);    
-                var ocupancies2= Ocupancies.init({room: 2}); 
-                ocupancies2.records= Ocupancies.records; 
-                ocupancies2.save();    
-               // localStorage.setItem("loc_ocupancies2", JSON.stringify(ocupancies2));  
-                PubSub.publish("insert");
-                        }
-                        
-        }); 
+      for (var i=1; i<=5; i++)
+           {
+               (function (e) {
+                    $.ajax({
+                    url: 'https://www.googleapis.com/calendar/v3/calendars/'+
+                    calendars_id[e-1]+
+                    '/events?timeMax=2014-08-31T00%3A00%3A00%2B00%3A00&timeMin=2014-08-01T00%3A00%3A00%2B00%3A00&key=AIzaSyD9k14jGF8mF3O0wn5kBV8C_AVs41bYKNs',
+                    dataType: 'jsonp',
+                    success: function(daten) {
+                       Ocupancies.room=e; 
+                        Ocupancies.populate(daten.items);
+                        ocupancies[e]=Ocupancies.init({room: e});
+                        ocupancies[e].records= Ocupancies.records;
+                        ocupancies[e].save();
+                        PubSub.publish("insert");}
+                    });
+                })(i);
+            }
+     }    
    
-    $.ajax({
-            url: 'https://www.googleapis.com/calendar/v3/calendars/df74thb0ufev0n2k7tsm9jcucs@group.calendar.google.com/events?timeMax=2014-08-31T00%3A00%3A00%2B00%3A00&timeMin=2014-08-01T00%3A00%3A00%2B00%3A00&key=AIzaSyD9k14jGF8mF3O0wn5kBV8C_AVs41bYKNs',
-            dataType: 'jsonp',
-            success: function(daten) {
-                Ocupancies.room = 3;
-                Ocupancies.populate(daten.items);    
-                var ocupancies3= Ocupancies.init({room: 3}); 
-                ocupancies3.records= Ocupancies.records; 
-                ocupancies3.save();    
-               // localStorage.setItem("loc_ocupancies2", JSON.stringify(ocupancies2));  
-                PubSub.publish("insert");
-                        }
-                        
-        }); 
-   
-    $.ajax({
-            url: 'https://www.googleapis.com/calendar/v3/calendars/ib6qioa059in1oc2222pg749eg@group.calendar.google.com/events?timeMax=2014-08-31T00%3A00%3A00%2B00%3A00&timeMin=2014-08-01T00%3A00%3A00%2B00%3A00&key=AIzaSyD9k14jGF8mF3O0wn5kBV8C_AVs41bYKNs',
-            dataType: 'jsonp',
-            success: function(daten) {
-                Ocupancies.room = 4;
-                Ocupancies.populate(daten.items);    
-                var ocupancies4= Ocupancies.init({room: 4}); 
-                ocupancies4.records= Ocupancies.records; 
-                ocupancies4.save();    
-               // localStorage.setItem("loc_ocupancies2", JSON.stringify(ocupancies2));  
-                PubSub.publish("insert");
-                        }
-                        
-        }); 
-   $.ajax({
-            url: 'https://www.googleapis.com/calendar/v3/calendars/2n2ajrefh42loj3bo2ipj89ptg4@group.calendar.google.com/events?timeMax=2014-08-31T00%3A00%3A00%2B00%3A00&timeMin=2014-08-01T00%3A00%3A00%2B00%3A00&key=AIzaSyD9k14jGF8mF3O0wn5kBV8C_AVs41bYKNs',
-            dataType: 'jsonp',
-            success: function(daten) {
-                Ocupancies.room = 5;
-                Ocupancies.populate(daten.items);    
-                var ocupancies5= Ocupancies.init({room: 5}); 
-                ocupancies5.records= Ocupancies.records; 
-                ocupancies5.save();    
-               // localStorage.setItem("loc_ocupancies2", JSON.stringify(ocupancies2));  
-                PubSub.publish("insert");
-                        }
-                        
-        }); 
-   
-   
-   
-   }
    
   return {
       initModule:initModule,
-      Ocupancies: Ocupancies
-      
+      Ocupancies: Ocupancies,
   };
     
 })();	
