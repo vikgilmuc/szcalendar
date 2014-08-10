@@ -8,7 +8,7 @@ Room opcupancy calendar for Seminar Zentrum in Wien
 +use of objects and prototyping
 +problems with the table headers to be fixed
 +problems working with 6 tables. It will be with one next version
-+refactor ajax calls and calendars
++refactor ajax calls and calendars. Promised Way
 
 
 -Oauth

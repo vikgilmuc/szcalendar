@@ -73,19 +73,21 @@ szc.model= (function(){
       for (var i=1; i<=5; i++)
            {
                (function (e) {
-                    $.ajax({
+                    var promise=$.ajax({
                     url: 'https://www.googleapis.com/calendar/v3/calendars/'+
                     calendars_id[e-1]+
                     '/events?timeMax=2014-08-31T00%3A00%3A00%2B00%3A00&timeMin=2014-08-01T00%3A00%3A00%2B00%3A00&key=AIzaSyD9k14jGF8mF3O0wn5kBV8C_AVs41bYKNs',
                     dataType: 'jsonp',
-                    success: function(daten) {
+                    }).promise();
+                    
+                    promise.done(function(daten) {
                        Ocupancies.room=e; 
                         Ocupancies.populate(daten.items);
                         ocupancies[e]=Ocupancies.init({room: e});
                         ocupancies[e].records= Ocupancies.records;
                         ocupancies[e].save();
-                        PubSub.publish("insert");}
-                    });
+                        PubSub.publish("insert");})
+                    
                 })(i);
             }
      }    
